@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import Router from "./router.js";
 
 class App extends Component {
   render() {
-    return null
+    return (
+        <Router />
+    );
   }
 }
 
-export default App
+export default App;
