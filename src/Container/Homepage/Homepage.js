@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from '../../components/Modal/Loader';
 import Layout from '../../components/layout';
-import Alert from '../../components/Modal/Alert';
 import { getTodo, createTodo, deleteTodo } from '../../actions/fetchAction';
-import { ADD } from '../../constants'
-
+import { ADD } from '../../constants';
+import { toast } from 'react-toastify';
 class Homepage extends Component {
 	constructor(props) {
 		super(props);
@@ -18,12 +17,29 @@ class Homepage extends Component {
 			todo: {
 				name: '',
 			},
+			todos: []
 		};
 	}
 
 	componentDidMount() {
 		this.props.getAllTodo();
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.todos != this.props.todos || nextProps.type != this.props.type) {
+		  this.setState({ todos: nextProps.todos.reverse() });
+		  if (this.props.message == '') {
+			return;
+		  }
+		  if (this.props.type === 'success') {
+			toast.success(this.props.message);
+			return;
+		  }
+		  if (this.props.type === 'error') {
+			toast.error(this.props.message);
+		  }
+		}
+	  }
 
 	handleInputChange = e => {
 		if (e.target.value !== ' ') {
@@ -36,13 +52,13 @@ class Homepage extends Component {
 	};
 
 	deleteTodo(id) {
-		this.props.deleteTodo(id)
+		this.props.deleteTodo(id);
 	}
 
 	createTodo = e => {
-		e.preventDefault()
+		e.preventDefault();
 		if (this.state.todo.name) {
-			this.props.createTodo(this.state.todo)
+			this.props.createTodo(this.state.todo);
 			this.resetState();
 		}
 	};
@@ -52,8 +68,8 @@ class Homepage extends Component {
 	};
 
 	closeModal = () => {
-		this.setState({ showModal: false })
-	}
+		this.setState({ showModal: false });
+	};
 
 	render() {
 		let { showModal, todo } = this.state;
@@ -61,26 +77,29 @@ class Homepage extends Component {
 			<Layout loader={this.props.loader}>
 				<Loader isHidden={!this.props.loader} />
 				<section className="wrapper">
-					<Alert message={this.props.message} />
 					<form>
-					<div className="field-wrap">
-				
-						<input
-							name="name"
-							value={todo.name}
-							className="input"
-							onChange={this.handleInputChange}
-							type="text"
-							placeholder="TODO..."
-						/>
-						<button type='submit' onClick={this.createTodo} className="btn">
-							{ADD}
-						</button>
-					</div>
+						<div className="field-wrap">
+							<input
+								name="name"
+								value={todo.name}
+								className="input"
+								onChange={this.handleInputChange}
+								type="text"
+								placeholder="TODO..."
+							/>
+							<button
+								disabled={todo.name ? false : true}
+								type="submit"
+								onClick={this.createTodo}
+								className="btn"
+							>
+								{ADD}
+							</button>
+						</div>
 					</form>
 
 					<ul className="list">
-						{this.props.todos.map((todo, key) => {
+						{this.state.todos.map((todo, key) => {
 							return (
 								<li key={key}>
 									<span className="list-text">{todo.name}</span>
@@ -105,9 +124,10 @@ class Homepage extends Component {
 }
 const mapStateToProps = state => {
 	return {
-		todos: state.todo && state.todo.todos ? state.todo.todos : [],
+		todos: state.todo.todos,
 		loader: state.todo.loader,
-		message: state.todo.message
+		message: state.todo.message,
+		type: state.todo.type
 	};
 };
 

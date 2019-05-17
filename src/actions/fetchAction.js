@@ -5,9 +5,9 @@ import {
 	ERROR,
 	SUCCESS,
 	FETCHING_ERROR,
-	DELETE_EROOR,
+	DELETE_ERROR,
 	CREATE_ERROR,
-	DELETE_SUCCSS,
+	DELETE_SUCCESS,
 	CREATE_SUCCESS,
 } from '../constants';
 
@@ -57,13 +57,13 @@ export const deleteTodo = id => {
 			await apiClient.deleteTodo(id);
 			dispatch({
 				type: SUCCESS,
-				payload: DELETE_SUCCSS,
+				payload: DELETE_SUCCESS,
 			});
 			dispatch(getTodo());
 		} catch (err) {
 			dispatch({
 				type: ERROR,
-				payload: DELETE_EROOR,
+				payload: DELETE_ERROR,
 			});
 		}
 	};

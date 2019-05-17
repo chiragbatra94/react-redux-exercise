@@ -3,7 +3,8 @@ import { GET_TODOS, STARTED, ERROR, SUCCESS } from '../constants';
 const initialState = {
 	todos: [],
 	loader: false,
-	message: ''
+	message: '',
+	type: ''
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -23,13 +24,15 @@ const todoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				loader: true,
-				message: action.payload
+				message: action.payload,
+				type: 'success'
 			};
 		case ERROR:
 			return {
 				...state,
 				loader: false,
-				message: action.payload
+				message: action.payload,
+				type: 'error'
 			};
 		default:
 			return state;

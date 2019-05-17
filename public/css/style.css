@@ -1,3 +1,5 @@
+@import 'react-toastify/dist/ReactToastify.min.css';
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -13,14 +15,17 @@ body {
 	color: #333333;
 	line-height: 20px;
 	font-size: 14px;
+	background-color: #f6f6f6;
 }
 .wrapper {
 	background: white;
 	max-width: 400px;
-	margin: 0px auto;
-	padding: 50px 0px 0px;
-	height: calc(100% - 100px);
+	margin: 20px auto;
+	padding: 20px;
+	height: calc(100% - 140px);
 	box-sizing: border-box;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .field-wrap {
 	border: 1px solid #e5e5e5;
@@ -43,24 +48,28 @@ form {
 	outline: none;
 }
 .btn {
-	background: #4e5f7a;
+	background: #41a7ff;
 	color: #fff;
 	border: 0px;
 	padding: 0px 15px;
 	border-radius: 0px;
 }
+
+.btn:disabled {
+	opacity: 0.7;
+}
 .list {
 	border-top: 2px solid #4e5f7a;
 	padding: 10px 0px;
-	height: calc(100% - 112px);
+	height: calc(100% - 60px);
 	overflow-y: auto;
 	box-sizing: border-box;
 }
 .list li {
-	margin-bottom: 10px;
+	/* margin-bottom: 10px; */
 	backdrop-filter: #fff;
 	position: relative;
-	padding: 10px;
+	padding: 12px 10px;
 	display: flex;
 }
 .list li .list-text {
@@ -75,8 +84,9 @@ form {
 .list li:nth-child(2n) {
 	background: #e5e5e5;
 }
-.header-sec {
-	background: #c1bfbf;
+.header-sec, .footer-sec{
+	background: #41a7ff;
+	color: #fff;
 	font-size: 20px;
 	height: 50px;
 	display: flex;
@@ -124,24 +134,7 @@ form {
 	height: 120px;
 	-webkit-animation: spin 2s linear infinite; /* Safari */
 	animation: spin 2s linear infinite;
-}
-footer {
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	width: 100%;
-	box-sizing: border-box;
-	background: #c1bfbf;
-	font-size: 20px;
-	height: 50px;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-}
-footer p {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
 }
 .message {
 	color: #332d2d;
@@ -167,4 +160,14 @@ footer p {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
