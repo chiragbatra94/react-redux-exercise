@@ -5,7 +5,7 @@ import Header from './Header/HomeHeader';
 
 export default props => {
 	return (
-		<div className={props.loader ? 'scroll-disable' : ''}>
+		<div style={{height:'100%'}} className={props.loader ? 'scroll-disable' : ''}>
 			<Header />
 			{props.children}
 			<Footer />

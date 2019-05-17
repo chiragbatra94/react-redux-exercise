@@ -2,6 +2,10 @@
 	margin: 0px;
 	padding: 0px;
 }
+html,body,#root{
+	height: 100%;
+}
+
 body {
 	font-family: 'Lato', sans-serif;
 	color: #333333;
@@ -11,7 +15,10 @@ body {
 .wrapper {
 	background: white;
 	max-width: 400px;
-	margin: 50px auto;
+	margin: 0px auto;
+	padding: 50px 0px 0px;
+	height: calc(100% - 100px);
+	box-sizing: border-box;
 }
 .field-wrap {
 	border: 1px solid #e5e5e5;
@@ -43,6 +50,9 @@ form {
 .list {
 	border-top: 2px solid #4e5f7a;
 	padding: 10px 0px;
+	height: calc(100% - 62px);
+	overflow-y: auto;
+	box-sizing: border-box;
 }
 .list li {
 	margin-bottom: 10px;
