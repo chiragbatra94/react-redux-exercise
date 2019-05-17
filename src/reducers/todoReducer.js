@@ -1,9 +1,7 @@
-import { GET_TODOS, ADD_TODO, DELETE_TODO, FAILURE } from '../constants';
+import { GET_TODOS } from '../constants';
 
 const initialState = {
-	loading: false,
 	todos: [],
-	error: null,
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -11,15 +9,7 @@ const todoReducer = (state = initialState, action) => {
 		case GET_TODOS:
 			return {
 				...state,
-				loading: false,
-				error: null,
-				todos: [...state.todos, action.payload],
-			};
-		case FAILURE:
-			return {
-				...state,
-				loading: false,
-				error: action.payload.error,
+				todos: action.payload,
 			};
 		default:
 			return state;

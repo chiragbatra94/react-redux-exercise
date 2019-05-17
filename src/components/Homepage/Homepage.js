@@ -1,12 +1,12 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Loader from '../Modal/Loader';
 import Layout from '../layout';
 import AlertModal from '../Modal/AlertModal';
 import { apiClient } from '../../api-client';
-
-// import { getTodoList, addTodo, deleteTodo } from '../../actions/fetchAction';
+import { getTodo } from '../../actions/fetchAction';
 
 class Homepage extends Component {
 	constructor(props) {
@@ -18,27 +18,12 @@ class Homepage extends Component {
 			todo: {
 				name: '',
 			},
-			todos: [],
 		};
 	}
 
 	componentDidMount() {
-		this.getAllTodo();
+		this.props.getAllTodo();
 	}
-
-	getAllTodo = () => {
-		this.toggleLoader();
-		apiClient
-			.getAllTodos()
-			.then(todos => {
-				this.setState({ todos: todos.payload });
-				this.toggleLoader();
-			})
-			.catch(err => {
-				console.log('Err. in Homepage.getAllTodo:: %o', err);
-				this.toggleLoader();
-			});
-	};
 
 	toggleLoader = () => {
 		this.setState({ loader: !this.state.loader });
@@ -56,16 +41,31 @@ class Homepage extends Component {
 
 	deleteTodo(id) {
 		this.toggleLoader();
-		apiClient.deleteTodo(id);
-		this.getAllTodo();
-		this.toggleLoader();
+		apiClient
+			.deleteTodo(id)
+			.then(res => {
+				this.toggleLoader();
+			})
+			.catch(err => {
+				console.log('Err. in Homepage.deleteTodo:: %o', err);
+				this.toggleLoader();
+			});
+		this.props.getAllTodo();
 	}
 
 	createTodo = e => {
 		if (this.state.todo.name) {
 			this.toggleLoader();
-			apiClient.createTodo(this.state.todo);
-			this.getAllTodo();
+			apiClient
+				.createTodo(this.state.todo)
+				.then(res => {
+					this.toggleLoader();
+				})
+				.catch(err => {
+					console.log('Err. in Homepage.createTodo:: %o', err);
+					this.toggleLoader();
+				});
+			this.props.getAllTodo();
 			this.resetState();
 		}
 	};
@@ -95,7 +95,7 @@ class Homepage extends Component {
 					</div>
 
 					<ul className="list">
-						{this.state.todos.map((todo, key) => {
+						{this.props.todos.map((todo, key) => {
 							return (
 								<li key={key}>
 									<span className="list-text">{todo.name}</span>
@@ -118,18 +118,24 @@ class Homepage extends Component {
 		);
 	}
 }
+const mapStateToProps = state => {
+	return {
+		todos: state.todo && state.todo.todos ? state.todo.todos : [],
+	};
+};
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		createTodo: todo => {
-// 		dispatch(addTodo(todo));
-// 	  }
-// 	};
-//   };
+const mapDispatchToProps = dispatch => {
+	return {
+		getAllTodo: () => {
+			dispatch(getTodo());
+		},
+		createTodo: todo => {
+			dispatch(addTodo(todo));
+		},
+	};
+};
 
-//   export default connect(
-// 	null,
-// 	mapDispatchToProps
-//   )(NewTodo);
-
-export default Homepage;
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Homepage);
