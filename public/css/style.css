@@ -2,7 +2,9 @@
 	margin: 0px;
 	padding: 0px;
 }
-html,body,#root{
+html,
+body,
+#root {
 	height: 100%;
 }
 
@@ -50,7 +52,7 @@ form {
 .list {
 	border-top: 2px solid #4e5f7a;
 	padding: 10px 0px;
-	height: calc(100% - 62px);
+	height: calc(100% - 112px);
 	overflow-y: auto;
 	box-sizing: border-box;
 }
@@ -63,12 +65,12 @@ form {
 }
 .list li .list-text {
 	display: flex;
-    flex: 1;
+	flex: 1;
 }
-.list li  .delete-icon{
+.list li .delete-icon {
 	display: flex;
-    justify-content: center;
-    align-items: center
+	justify-content: center;
+	align-items: center;
 }
 .list li:nth-child(2n) {
 	background: #e5e5e5;
@@ -83,6 +85,19 @@ form {
 }
 
 .header-sec p {
+	width: 95%;
+	margin: 0px auto;
+}
+.footer-sec {
+	background: #c1bfbf;
+	font-size: 20px;
+	height: 50px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.footer-sec p {
 	width: 75%;
 	margin: 0px auto;
 }
@@ -110,22 +125,46 @@ form {
 	-webkit-animation: spin 2s linear infinite; /* Safari */
 	animation: spin 2s linear infinite;
 }
-footer{
+footer {
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
 	box-sizing: border-box;
 	background: #c1bfbf;
-    font-size: 20px;
-    height: 50px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-}
-footer p{
+	font-size: 20px;
+	height: 50px;
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: flex-start;
+	align-items: center;
+}
+footer p {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.message {
+	color: #332d2d;
+	padding: 5px 0px;
+	background: #c1bfbf;
+	margin-bottom: 10px;
+	text-align: center;
+}
+/* Safari */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

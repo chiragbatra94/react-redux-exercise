@@ -1,14 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Layout from "../layout";
+import { PAGE_NOT_FOUND } from '../../constants'
 
-class PageNotFound extends Component {
-  render() {
-    return (
+const PageNotFound =() =>
       <Layout>
-        PAGE NOT FOUND
+        {PAGE_NOT_FOUND}
       </Layout>
-    );
-  }
-}
-
+  
 export default PageNotFound;

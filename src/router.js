@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Homepage from './components/Homepage/Homepage';
+import Homepage from './Conatainer/Homepage/Homepage';
 import PageNotFound from './components/NotFound/PageNotFound';
 import ErrorBoundary from './Error';
 

@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { TODO_LIST } from '../../constants'
 
-class HomeHeader extends Component {
-	render() {
-		return (
-        <header className="header-sec">
-					<p>
-						Todo List
-					</p>
-				</header>
-		);
-	}
-}
+const HomeHeader = () =>
+
+	<header className="header-sec">
+		<p>{TODO_LIST}</p>
+	</header>
 
 export default HomeHeader;
